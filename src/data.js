@@ -2,7 +2,7 @@ export const profile = {
   name: "Mamatha Yarramaneni",
   role: "Full Stack Software Engineer",
   tagline:
-    "I build scalable, AI-powered web platforms with Java, Spring Boot, React, and AWS.",
+    "Tenacious, quick-witted engineer crafting elegant, AI-powered products that scale. I obsess over customers, iterate with agility, and never stop improving.",
   about:
     "I'm a full-stack software engineer with experience across scalable backends, cloud infrastructure, and polished React front ends. I currently build audience-intelligence tooling at Resonate Networks, including AI-driven search and automated reporting. I hold a Master's in Computer Science from the University at Buffalo, and I enjoy turning slow, manual workflows into fast, reliable systems.",
   github: "https://github.com/MamathaYarramaneni",
