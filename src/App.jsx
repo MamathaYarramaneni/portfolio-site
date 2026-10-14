@@ -47,8 +47,16 @@ export default function App() {
     <div className="min-h-screen">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/60 backdrop-blur-lg">
         <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-semibold text-white">
-            {profile.name.split(" ")[0]}
+          <a
+            href="#top"
+            aria-label="Back to top"
+            className="rounded-xl bg-linear-to-br from-violet-500 to-cyan-400 p-[1.5px] transition hover:scale-105"
+          >
+            <span className="grid h-10 w-10 place-items-center rounded-[10px] bg-slate-900">
+              <span className="bg-linear-to-br from-violet-400 to-cyan-300 bg-clip-text text-lg font-extrabold tracking-tight text-transparent">
+                MY
+              </span>
+            </span>
           </a>
           <div className="flex gap-5 text-sm text-slate-300">
             {["about", "experience", "projects", "contact"].map((s) => (
@@ -129,11 +137,11 @@ export default function App() {
               {profile.about}
             </p>
           </Reveal>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="mt-10 grid gap-5">
             {skillGroups.map((g, i) => (
               <Reveal key={g.title} delay={i * 0.07}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-cyan-300">
+                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 sm:flex sm:items-start sm:gap-6">
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-cyan-300 sm:mb-0 sm:w-40 sm:shrink-0 sm:pt-1">
                     {g.title}
                   </h3>
                   <div className="flex flex-wrap gap-2">

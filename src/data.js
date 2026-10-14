@@ -12,32 +12,61 @@ export const profile = {
 export const skillGroups = [
   {
     title: "Languages",
-    items: ["Java", "TypeScript", "JavaScript", "Python", "C++", "PyTorch"],
+    items: ["Java", "TypeScript", "JavaScript", "Python", "C++", "SQL"],
   },
   {
-    title: "Backend",
-    items: ["Spring Boot", "Node.js", "Express.js", "REST APIs", "Kafka"],
+    title: "Backend & Architecture",
+    items: [
+      "Spring Boot",
+      "Node.js",
+      "Express.js",
+      "Apache Tomcat",
+      "Kafka",
+      "Distributed Systems",
+      "Big Data",
+    ],
   },
   {
-    title: "Data",
-    items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "OpenSearch"],
+    title: "Databases",
+    items: ["PostgreSQL", "MySQL", "MongoDB", "NoSQL", "Redis", "OpenSearch"],
   },
   {
     title: "Cloud & DevOps",
     items: [
       "AWS",
       "GCP",
-      "Azure",
       "Docker",
       "Kubernetes",
-      "Jenkins",
-      "Git",
+      "DevOps",
+      "Splunk",
       "Linux",
+      "Unix",
+      "Git",
+    ],
+  },
+  {
+    title: "AI / GenAI",
+    items: [
+      "NLP",
+      "RAG",
+      "LangChain",
+      "BERT",
+      "Embeddings & Vector Search",
+      "PyTorch",
+      "TensorFlow",
+      "Hugging Face",
     ],
   },
   {
     title: "Frontend",
-    items: ["React", "Angular", "Redux", "HTML5", "Tailwind CSS"],
+    items: [
+      "React.js",
+      "Angular",
+      "Ember.js",
+      "Redux",
+      "HTML5",
+      "Tailwind CSS",
+    ],
   },
 ];
 
@@ -46,7 +75,7 @@ export const experience = [
     company: "Resonate Networks",
     place: "Reston, VA, US",
     title: "Full Stack Software Engineer",
-    period: "May 2024 – Present",
+    period: "May 2024 - Jan 2025",
     stack: ["TypeScript", "Java", "Spring Boot", "AWS"],
     points: [
       "Built a PowerPoint export feature with Apache POI in Spring Boot, automating reporting workflows and improving customer efficiency by 75%.",
@@ -59,7 +88,7 @@ export const experience = [
     company: "Ultimate Tool & Safety",
     place: "Arlington, TX, US",
     title: "Full Stack Software Engineer",
-    period: "Jul 2023 – Feb 2024",
+    period: "Jul 2023 - Feb 2024",
     stack: ["React", "Node.js", "PostgreSQL", "AWS"],
     points: [
       "Designed and shipped an end-to-end multi-tenant application: React and Redux front end, Node.js back end, PostgreSQL, Nginx, and AWS hosting with load balancing.",
@@ -71,7 +100,7 @@ export const experience = [
     company: "Navis",
     place: "Chennai, Tamil Nadu, India",
     title: "Software Engineer, Full Stack",
-    period: "Jan 2021 – Aug 2022",
+    period: "Jan 2021 - Aug 2022",
     stack: ["Java", "Spring Boot", "Angular", "Docker"],
     points: [
       "Delivered full-stack features with Angular and Spring Boot, reducing code defects by 30% and reaching 90% test coverage with Mocha, Chai, and Jest.",
