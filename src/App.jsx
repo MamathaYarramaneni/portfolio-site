@@ -1,6 +1,12 @@
 import { motion } from "motion/react";
-import { Mail, ExternalLink, ArrowDown, Code } from "lucide-react";
-import { profile, skills, projects } from "./data";
+import {
+  ExternalLink,
+  ArrowDown,
+  Code,
+  Briefcase,
+  GraduationCap,
+} from "lucide-react";
+import { profile, skillGroups, experience, projects, education } from "./data";
 
 const Reveal = ({ children, delay = 0 }) => (
   <motion.div
@@ -14,7 +20,7 @@ const Reveal = ({ children, delay = 0 }) => (
 );
 
 const Section = ({ id, title, children }) => (
-  <section id={id} className="mx-auto max-w-5xl px-6 py-24">
+  <section id={id} className="mx-auto max-w-5xl px-6 py-20">
     <Reveal>
       <h2 className="mb-10 text-3xl font-bold text-white">
         {title}
@@ -25,6 +31,17 @@ const Section = ({ id, title, children }) => (
   </section>
 );
 
+const Tag = ({ children }) => (
+  <span className="rounded bg-violet-500/15 px-2 py-1 text-xs text-violet-200">
+    {children}
+  </span>
+);
+
+const btnPrimary =
+  "rounded-full bg-linear-to-r from-violet-500 to-cyan-500 px-6 py-3 font-medium text-white transition hover:scale-105";
+const btnGhost =
+  "rounded-full border border-white/20 px-6 py-3 font-medium text-white transition hover:bg-white/10";
+
 export default function App() {
   return (
     <div className="min-h-screen">
@@ -33,16 +50,12 @@ export default function App() {
           <a href="#top" className="font-semibold text-white">
             {profile.name.split(" ")[0]}
           </a>
-          <div className="flex gap-6 text-sm text-slate-300">
-            <a href="#about" className="hover:text-white">
-              About
-            </a>
-            <a href="#projects" className="hover:text-white">
-              Projects
-            </a>
-            <a href="#contact" className="hover:text-white">
-              Contact
-            </a>
+          <div className="flex gap-5 text-sm text-slate-300">
+            {["about", "experience", "projects", "contact"].map((s) => (
+              <a key={s} href={`#${s}`} className="capitalize hover:text-white">
+                {s}
+              </a>
+            ))}
           </div>
         </nav>
       </header>
@@ -80,7 +93,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-6 text-xl text-slate-300"
+              className="mt-6 text-xl text-slate-200"
             >
               {profile.role}
             </motion.p>
@@ -98,36 +111,75 @@ export default function App() {
               transition={{ delay: 0.6 }}
               className="mt-10 flex justify-center gap-4"
             >
-              <a
-                href="#projects"
-                className="rounded-full bg-linear-to-r from-violet-500 to-cyan-500 px-6 py-3 font-medium text-white transition hover:scale-105"
-              >
+              <a href="#projects" className={btnPrimary}>
                 View my work
               </a>
-              <a
-                href="#contact"
-                className="rounded-full border border-white/20 px-6 py-3 font-medium text-white transition hover:bg-white/10"
-              >
-                Contact me
+              <a href="#contact" className={btnGhost}>
+                Get in touch
               </a>
             </motion.div>
           </div>
           <ArrowDown className="absolute bottom-8 animate-bounce text-slate-500" />
         </section>
 
-        {/* About */}
+        {/* About + Skills */}
         <Section id="about" title="About">
           <Reveal>
-            <p className="max-w-2xl text-lg leading-relaxed text-slate-300">
+            <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
               {profile.about}
             </p>
           </Reveal>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {skills.map((s, i) => (
-              <Reveal key={s} delay={i * 0.05}>
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200">
-                  {s}
-                </span>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {skillGroups.map((g, i) => (
+              <Reveal key={g.title} delay={i * 0.07}>
+                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-cyan-300">
+                    {g.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {g.items.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full border border-white/10 px-3 py-1 text-sm text-slate-200"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+
+        {/* Experience */}
+        <Section id="experience" title="Experience">
+          <div className="space-y-8 border-l border-white/10 pl-6">
+            {experience.map((job, i) => (
+              <Reveal key={job.company} delay={i * 0.08}>
+                <div className="relative">
+                  <span className="absolute -left-[34px] top-1 grid h-5 w-5 place-items-center rounded-full bg-slate-950 ring-2 ring-violet-400">
+                    <Briefcase size={10} className="text-violet-300" />
+                  </span>
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="text-xl font-semibold text-white">
+                      {job.title} ·{" "}
+                      <span className="text-cyan-300">{job.company}</span>
+                    </h3>
+                    <span className="text-sm text-slate-400">{job.period}</span>
+                  </div>
+                  <p className="text-sm text-slate-500">{job.place}</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-300">
+                    {job.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {job.stack.map((t) => (
+                      <Tag key={t}>{t}</Tag>
+                    ))}
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -135,9 +187,9 @@ export default function App() {
 
         {/* Projects */}
         <Section id="projects" title="Projects">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2">
             {projects.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.1}>
+              <Reveal key={p.title} delay={i * 0.08}>
                 <motion.article
                   whileHover={{ y: -8 }}
                   className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-colors hover:border-violet-400/50"
@@ -145,40 +197,59 @@ export default function App() {
                   <h3 className="text-xl font-semibold text-white">
                     {p.title}
                   </h3>
-                  <p className="mt-3 flex-1 text-sm text-slate-400">{p.desc}</p>
+                  {p.period && (
+                    <p className="mt-1 text-xs text-slate-500">{p.period}</p>
+                  )}
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+                    {p.desc}
+                  </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded bg-violet-500/15 px-2 py-1 text-xs text-violet-200"
-                      >
-                        {t}
-                      </span>
+                      <Tag key={t}>{t}</Tag>
                     ))}
                   </div>
-                  <div className="mt-5 flex gap-4 text-sm">
-                    {p.live && (
-                      <a
-                        href={p.live}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-1 text-cyan-300 hover:underline"
-                      >
-                        <ExternalLink size={14} /> Live
-                      </a>
-                    )}
-                    {p.repo && (
-                      <a
-                        href={p.repo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-1 text-cyan-300 hover:underline"
-                      >
-                        <Code size={14} /> Code
-                      </a>
-                    )}
-                  </div>
+                  {(p.live || p.repo) && (
+                    <div className="mt-5 flex gap-4 text-sm">
+                      {p.live && (
+                        <a
+                          href={p.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-1 text-cyan-300 hover:underline"
+                        >
+                          <ExternalLink size={14} /> Live
+                        </a>
+                      )}
+                      {p.repo && (
+                        <a
+                          href={p.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-1 text-cyan-300 hover:underline"
+                        >
+                          <Code size={14} /> Code
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </motion.article>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+
+        {/* Education */}
+        <Section id="education" title="Education">
+          <div className="grid gap-6 md:grid-cols-2">
+            {education.map((e, i) => (
+              <Reveal key={e.school} delay={i * 0.08}>
+                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
+                  <GraduationCap className="mb-3 text-cyan-300" />
+                  <h3 className="font-semibold text-white">{e.school}</h3>
+                  <p className="mt-1 text-sm text-slate-300">{e.degree}</p>
+                  <p className="mt-2 text-sm text-slate-400">{e.detail}</p>
+                  <p className="mt-1 text-xs text-slate-500">{e.period}</p>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -188,31 +259,25 @@ export default function App() {
         <Section id="contact" title="Contact">
           <Reveal>
             <p className="max-w-xl text-slate-300">
-              Open to new opportunities and collaborations. The best way to
-              reach me is by email.
+              Open to new opportunities and collaborations. Reach out on
+              LinkedIn or check out my code on GitHub.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <a
-                href={`mailto:${profile.email}`}
-                className="flex items-center gap-2 rounded-full bg-linear-to-r from-violet-500 to-cyan-500 px-6 py-3 font-medium text-white transition hover:scale-105"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className={btnPrimary}
               >
-                <Mail size={18} /> Email me
+                LinkedIn
               </a>
               <a
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-white/20 px-6 py-3 text-white transition hover:bg-white/10"
+                className={btnGhost}
               >
                 GitHub
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-white/20 px-6 py-3 text-white transition hover:bg-white/10"
-              >
-                LinkedIn
               </a>
             </div>
           </Reveal>
